@@ -1,0 +1,32 @@
+<?php
+
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/nodeType.inc" );
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/book.inc" );
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/node.inc" );
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/file.inc" );
+
+/**
+ * Util method to debug objects etc with core debug
+ *
+ * @param $value
+ * @param string $id
+ */
+function drupal_set_message_array ( $value, $id="Debug util" ) {
+    include_once DRUPAL_ROOT . '/includes/utility.inc';
+
+    debug($value, $id, TRUE);
+}
+
+/**
+ * Clear Drupal shortcut
+ */
+function clearInitDrupal() {
+
+    //Cleanup and init everything
+    cache_clear_all ();
+    drupal_theme_rebuild ();
+
+    drupal_cron_cleanup ();
+    drupal_cron_run ();
+
+}
