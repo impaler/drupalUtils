@@ -7,16 +7,22 @@
  * @param array $settings
  *
  * @return bool
+ *
+ *
+ *
+ *  Example
+$node = array (
+    'title' => 'Home' ,
+    'type' => 'site_page' ,
+    'path' => array (
+                'alias' => 'Home' , 
+            ),
+    'uid' => 1 ,
+);
+createNode ( $node );
+ *
  */
 function createNode ( array $settings ) {
-////    example
-//    $node = array (
-//        'title' => 'Node Title' ,
-//        'type' => 'page' ,
-//        'path' => 'pathalias' ,
-//        'uid' => 1 ,
-//    );
-//    $node = create_node ( $node );
 
     //prepare standard settings
     $node = new stdClass();
@@ -65,5 +71,14 @@ function createNode ( array $settings ) {
         $node->timestamp = $settings[ 'timestamp' ];
 
     node_save ( $node );
+
+    if ( isset ( $settings[ 'path' ] ) ) {
+        $path = array (
+            'source' => 'node/' . $node->nid ,
+            'alias' => $settings[ 'path' ] ,
+            'language' => 'und' ,
+        );
+        createPathAlias ( $path );
+    }
 
 }

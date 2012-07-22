@@ -5,39 +5,41 @@
  *
  * @param $bookData
  * @return stdClass
+ * 
+ * Eg;
+ * <pre>
+    $body ="Text for a test body field";
+    $page = array (
+        'title' => 'About' ,
+        'body' => $body ,
+        'uid' => 1 ,
+        'bid' => 'new' ,
+        'format' => 2 ,
+    );
+
+    set to new book if no parent was set
+    if ( isset( $bookData [ 'path' ] ) ) {
+        $path = array (
+         'alias' => $bookData['path'] ,
+         'pid' => null ,
+         'source' => null ,
+         'language' => LANGUAGE_NONE ,
+         'pathauto' => 1 ,
+ {
+     );
+    } else {
+        $path = array (
+            'alias' => '' ,
+            'pid' => null ,
+            'source' => null ,
+            'language' => LANGUAGE_NONE ,
+            'pathauto' => 1 ,
+        );
+    }
+ * </pre>
+ * 
  */
 function createNewBook ( $bookData ) {
-
-////    example usage
-//    $body ="Text for a test body field";
-//    $page = array (
-//        'title' => 'About' ,
-//        'body' => $body ,
-//        'uid' => 1 ,
-//        'bid' => 'new' ,
-//        'format' => 2 ,
-//    );
-
-    //set to new book if no parent was set
-//    if ( isset( $bookData [ 'path' ] ) ) {
-//        $path = array (
-//         'alias' => $bookData['path'] ,
-//         'pid' => null ,
-//         'source' => null ,
-//         'language' => LANGUAGE_NONE ,
-//         'pathauto' => 1 ,
-// {
-//     );
-//    } else {
-//        $path = array (
-//            'alias' => '' ,
-//            'pid' => null ,
-//            'source' => null ,
-//            'language' => LANGUAGE_NONE ,
-//            'pathauto' => 1 ,
-//        );
-//    }
-
 
     //set to new book if no parent was set
     if ( empty( $bookData [ 'bid' ] ) ) {

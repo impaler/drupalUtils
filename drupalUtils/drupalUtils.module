@@ -1,5 +1,7 @@
 <?php
 
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/path/path.inc" );
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/utils/file.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/nodeType.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/book.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/node.inc" );
@@ -22,11 +24,11 @@ function drupal_set_message_array ( $value, $id="Debug util" ) {
  */
 function clearInitDrupal() {
 
-    //Cleanup and init everything
+    //Cleanup and init everything you can think of
     cache_clear_all ();
     drupal_theme_rebuild ();
-
+    menu_rebuild ();
     drupal_cron_cleanup ();
     drupal_cron_run ();
-
+    
 }
