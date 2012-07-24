@@ -43,7 +43,7 @@ function replace_strings_in_file ( $file_path , $find , $replace ) {
 }
 
 function drupal_get_absolute_theme_path ( $themeName ) {
-
+    //error showing up with drush DOCUMENT_ROOT is not available
     if ( function_exists ( "drush_get_context" ) ) {
         $rootPath = drush_get_context ( 'DRUSH_DRUPAL_ROOT' );
     } else {
