@@ -3,7 +3,7 @@
 /**
  * Copy a directory recursively.
  *
- * Eg;  
+ * Eg;
 drush_op('copy_dir_recursively', $source_dir, $target_dir );
  *
  * */
@@ -43,6 +43,14 @@ function replace_strings_in_file ( $file_path , $find , $replace ) {
 }
 
 function drupal_get_absolute_theme_path ( $themeName ) {
-    $path =  $_SERVER['DOCUMENT_ROOT'] . base_path() . drupal_get_path('theme', $themeName );
+
+    if ( function_exists ( "drush_get_context" ) ) {
+        $rootPath = drush_get_context ( 'DRUSH_DRUPAL_ROOT' );
+    } else {
+        $rootPath = $_SERVER[ 'DOCUMENT_ROOT' ];
+    }
+
+    $path = $rootPath . base_path () . drupal_get_path ( 'theme' , $themeName );
+
     return $path;
 }

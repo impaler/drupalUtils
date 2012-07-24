@@ -39,7 +39,19 @@ function createNode ( array $settings ) {
     $node->status = 1;
     $node->active = 1;
     $node->promote = 1;
-
+    
+    if ( !isset ( $settings[ 'bodyformat' ] ) ) {
+        $settings[ 'bodyformat' ] = 'plain_text';
+    }
+    
+    //todo language specific
+    if ( isset ( $settings[ 'body' ] ) ) {
+        $node->body[ LANGUAGE_NONE ][ 0 ] = array (
+            'value' => $settings[ 'body' ] ,
+            'format' => $settings[ 'bodyformat' ] ,
+        );
+    }
+    
     if ( isset ( $settings[ 'path' ] ) ) {
         $node->path = array (
             'alias' => $settings[ 'path' ]
