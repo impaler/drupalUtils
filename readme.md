@@ -1,5 +1,5 @@
 drupalUtils
-=============
+-------
 
 I use this module as a central library for modules I create. Having this on github lets me use it in .make files 
 easily etc.
@@ -9,6 +9,7 @@ easily etc.
 This code is in active development and is not intended for production use, rather very rough examples of getting 
 common drupal things done.
 
+-------
 
 ### License
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,

@@ -51,14 +51,6 @@ function createNode ( array $settings ) {
             'format' => $settings[ 'bodyformat' ] ,
         );
     }
-    
-    if ( isset ( $settings[ 'path' ] ) ) {
-        $node->path = array (
-            'alias' => $settings[ 'path' ]
-        );
-    } else {
-        $node->path[ 'pathauto' ] = TRUE;
-    }
 
     //make sure right user is being used in drush
     global $user;
@@ -73,24 +65,32 @@ function createNode ( array $settings ) {
     }
 
     // Set the timestamp fields.
-    if ( empty( $settings[ 'created' ] ) )
+    if ( !empty( $settings[ 'created' ] ) )
         $node->created = $settings[ 'created' ];
 
-    if ( empty( $settings[ 'changed' ] ) )
+    if ( !empty( $settings[ 'changed' ] ) )
         $node->changed = $settings[ 'changed' ];
 
-    if ( ! empty( $settings[ 'timestamp' ] ) )
+    if ( !empty( $settings[ 'timestamp' ] ) )
         $node->timestamp = $settings[ 'timestamp' ];
 
+//    if ( isset ( $settings[ 'path' ] ) ) {
+//        $node->path = array (
+//            'alias' => $settings[ 'path' ]
+//        );
+//    } else {
+//        $node->path[ 'pathauto' ] = TRUE;
+//    }
+    
     node_save ( $node );
 
-    if ( isset ( $settings[ 'path' ] ) ) {
-        $path = array (
-            'source' => 'node/' . $node->nid ,
-            'alias' => $settings[ 'path' ] ,
-            'language' => 'und' ,
-        );
-        createPathAlias ( $path );
-    }
+//    if ( isset ( $settings[ 'path' ] ) ) {
+//        $path = array (
+//            'source' => 'node/' . $node->nid ,
+//            'alias' => $settings[ 'path' ] ,
+//            'language' => 'und' ,
+//        );
+//        createPathAlias ( $path );
+//    }
 
 }

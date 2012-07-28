@@ -40,12 +40,14 @@ function createNodeContentType ( array $settings ) {
     //core node type save
     node_type_save ( $contentType );
 
-    if ( ! isset ( $settings[ 'body' ] ) ) {
-        $body = array (
-            'type' => $settings[ 'type' ]
-        );
+    if ( isset ( $settings[ 'body' ] ) ) {
+//        $body = array (
+//            'type' => $settings[ 'type' ]
+//        );
+        $body = new stdClass();
+        $body->type = $settings['type'];
 
-        if ( ! isset ( $settings[ 'bodylabel' ] ) ) $settings[ 'bodylabel' ] = "Body";
+//        if ( ! isset ( $settings[ 'bodylabel' ] ) ) $settings[ 'bodylabel' ] = "Body";
 
         node_add_body_field ( $body , $settings[ 'bodylabel' ] );
     }
