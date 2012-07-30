@@ -14,9 +14,8 @@
 $node = array (
     'title' => 'Home' ,
     'type' => 'site_page' ,
-    'path' => array (
-                'alias' => 'Home' , 
-            ),
+    'bodyformat' => 'markdown' ,
+    'path' => 'home',
     'uid' => 1 ,
 );
 createNode ( $node );
@@ -29,7 +28,6 @@ function createNode ( array $settings ) {
     $node->type = $settings[ 'type' ];
     $node->bundle = 'node_content';
     $node->title = $settings[ 'title' ];
-    $node->language = LANGUAGE_NONE;
     node_object_prepare ( $node );
 
     //setup more settings
@@ -45,11 +43,18 @@ function createNode ( array $settings ) {
     }
     
     //todo language specific
+    $node->language = LANGUAGE_NONE;
+    
     if ( isset ( $settings[ 'body' ] ) ) {
         $node->body[ LANGUAGE_NONE ][ 0 ] = array (
             'value' => $settings[ 'body' ] ,
             'format' => $settings[ 'bodyformat' ] ,
         );
+    }
+    
+    if ( isset ( $settings[ 'path' ] ) ) {
+        $node->path = array ( 'alias' => $settings[ 'path' ] );
+        $node->path['pathauto'] = TRUE;
     }
 
     //make sure right user is being used in drush
@@ -73,24 +78,7 @@ function createNode ( array $settings ) {
 
     if ( !empty( $settings[ 'timestamp' ] ) )
         $node->timestamp = $settings[ 'timestamp' ];
-
-//    if ( isset ( $settings[ 'path' ] ) ) {
-//        $node->path = array (
-//            'alias' => $settings[ 'path' ]
-//        );
-//    } else {
-//        $node->path[ 'pathauto' ] = TRUE;
-//    }
     
     node_save ( $node );
-
-//    if ( isset ( $settings[ 'path' ] ) ) {
-//        $path = array (
-//            'source' => 'node/' . $node->nid ,
-//            'alias' => $settings[ 'path' ] ,
-//            'language' => 'und' ,
-//        );
-//        createPathAlias ( $path );
-//    }
 
 }
