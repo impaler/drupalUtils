@@ -38,23 +38,25 @@ function createNode ( array $settings ) {
     $node->active = 1;
     $node->promote = 1;
     
-    if ( !isset ( $settings[ 'bodyformat' ] ) ) {
-        $settings[ 'bodyformat' ] = 'plain_text';
-    }
-    
     //todo language specific
     $node->language = LANGUAGE_NONE;
     
-    if ( isset ( $settings[ 'body' ] ) ) {
+    //core body field
+    if ( !empty ( $settings[ 'body' ] ) ) {
+        if ( empty ( $settings[ 'bodyformat' ] ) ) {
+            $settings[ 'bodyformat' ] = 'plain_text';
+        }
         $node->body[ LANGUAGE_NONE ][ 0 ] = array (
             'value' => $settings[ 'body' ] ,
             'format' => $settings[ 'bodyformat' ] ,
         );
     }
     
-    if ( isset ( $settings[ 'path' ] ) ) {
-        $node->path = array ( 'alias' => $settings[ 'path' ] );
+    //pathauto settings
+    if ( !empty ( $settings[ 'path' ] ) ) {
         $node->path['pathauto'] = TRUE;
+        $node->path['alias'] = $settings[ 'path' ];
+        $node->pathauto_perform_alias = TRUE;
     }
 
     //make sure right user is being used in drush

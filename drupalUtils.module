@@ -2,10 +2,12 @@
 
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/path/path.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/utils/file.inc" );
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/utils/views.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/nodeType.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/book.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/node.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/file.inc" );
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/taxonomy.inc" );
 
 /**
  * Util method to debug objects etc with core debug
@@ -32,3 +34,40 @@ function clearInitDrupal() {
     drupal_cron_run ();
     
 }
+
+function testThing() {
+
+//    variable_set ( 'geshifilter_format_specific_options' , "0" );
+//    variable_set ( 'geshifilter_tags' , "code blockcode" );
+//    $tag_styles[2] = 2;
+//    $tag_styles[1] = 0;
+//    $tag_styles[4] = 0;
+//    $tag_styles[8] = 0;
+//    variable_set ( 'geshifilter_tag_styles' , $tag_styles );
+//    variable_set ( 'geshifilter_default_highlighting' , "haxe" );
+//    variable_set ( 'geshifilter_default_line_numbering' , "0" );    
+//    variable_set ( 'geshifilter_use_highlight_string_for_php' , "0" );
+//    variable_set ( 'geshifilter_enable_keyword_urls' , "0" );
+//    variable_set ( 'geshifilter_css_mode' , "3" );
+//    variable_set ( 'geshifilter_code_container' , "1" );
+    
+    variable_set ( 'geshifilter_language_enabled_c' , "0" );
+    variable_set ( 'geshifilter_language_enabled_cpp' , "0" );
+    variable_set ( 'geshifilter_language_enabled_drupal5' , "0" );
+    variable_set ( 'geshifilter_language_enabled_drupal6' , "0" );
+    variable_set ( 'geshifilter_language_enabled_java' , "0" );
+    variable_set ( 'geshifilter_language_enabled_javascript' , "0" );
+    variable_set ( 'geshifilter_language_enabled_php' , "0" );
+    variable_set ( 'geshifilter_language_enabled_python' , "0" );
+    variable_set ( 'geshifilter_language_enabled_ruby' , "0" );
+    
+    variable_set ( 'geshifilter_language_enabled_haxe' , "1" );
+    variable_set ( 'geshifilter_language_tags_haxe' , "<haxe>" );
+//    variable_set ( 'geshifilter_language_enabled_haxe' , "1" );
+    
+//    
+//    print_r( (variable_get('geshifilter_tag_styles')) );
+
+}
+
+#drush php-eval "drupal_set_message_array( unserialize(variable_get('geshifilter_cssfile_languages')))"
