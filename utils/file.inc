@@ -54,3 +54,84 @@ function drupal_get_absolute_theme_path ( $themeName ) {
 
     return $path;
 }
+
+function createExistingFileFilefieldArray ( $filepath , $fieldName , $uid , $imageOptions = Null ) {
+
+    $file = saveExistingFileToDB ( $filepath , $uid );
+    $options = createFileFieldOptions ( $file , $uid , $imageOptions );
+
+    $field = array (
+        'name' => $fieldName ,
+        'options' => $options ,
+    );
+
+    return $field;
+
+}
+
+function createFileFieldOptions ( $file , $userUID , $imageOptions = Null ) {
+    $options[ 'und' ][ ] = array (
+        'uid' => $userUID ,
+        'fid' => $file->fid ,
+        'filename' => $file->filename ,
+        'uri' => $file->uri ,
+        'filemime' => $file->filemime ,
+        'filesize' => $file->filesize ,
+        'status' => 1 ,
+        'display' => 1 ,
+    );
+
+    if ( $imageOptions != Null ) {
+        $options[ 'und' ][ ] = array (
+            'alt' => $imageOptions[ 'alt' ] ,
+            'title' => $imageOptions[ 'title' ] ,
+        );
+    }
+
+    return $options;
+}
+
+function createTaxonomyFieldArray ( $fieldName , $tid ) {
+    $options[ 'und' ][ ] = array (
+        'tid' => $tid ,
+    );
+
+    $field = array (
+        'name' => $fieldName ,
+        'options' => $options ,
+    );
+
+    return $field;
+
+}
+
+function createGeshiFieldArray ( $fieldName , $sourcecode , $language ) {
+
+    $options[ 'und' ][ ] = array (
+        'sourcecode' => $sourcecode ,
+        'language' => $language ,
+    );
+
+    $field = array (
+        'name' => $fieldName ,
+        'options' => $options ,
+    );
+
+    return $field;
+}
+
+function saveExistingFileToDB ( $filepath , $userUID , $destination = Null ) {
+    //save it to the default location if no destination is given
+    if ( $destination == Null )
+        $destination = file_default_scheme () . '://' . basename ( $filepath );
+
+    $file = file_save_data ( file_get_contents ( $filepath ) , $destination );
+    if ( $file == FALSE )
+        return FALSE;
+
+    $file = file_load ( $file->fid );
+    $file->uid = $userUID;
+
+    $file = file_save ( $file );
+    return $file;
+}
