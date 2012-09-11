@@ -1,9 +1,12 @@
 <?
 
-function render_view ( $name , $display_id = 'default' ) {
+function render_view ( $name , $display_id = 'default', $args=null ) {
 
     $view = views_get_view ( $name );
+    
     if ( $view ) {
+        if ($args != null)
+        $view->set_arguments($args);
         $view->hide_admin_links = TRUE;
         if ( ! $view || ! $view->access ( $display_id ) ) {
             return;
@@ -15,7 +18,5 @@ function render_view ( $name , $display_id = 'default' ) {
         
         return FALSE;
     }
-    
-
 
 }
