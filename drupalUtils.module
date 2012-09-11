@@ -9,6 +9,7 @@ require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/node.inc" 
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/file.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/user.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/taxonomy.inc" );
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/fields.inc" );
 
 /**
  * Util method to debug objects etc with core debug
