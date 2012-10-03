@@ -1,5 +1,19 @@
 <?
 
+function createtextFieldArray ( $fieldName , $sourcecode ) {
+
+    $options[ 'und' ][ ] = array (
+        'value' => $sourcecode ,
+    );
+
+    $field = array (
+        'name' => $fieldName ,
+        'options' => $options ,
+    );
+
+    return $field;
+}
+
 function createGeshiFieldArray ( $fieldName , $sourcecode , $language ) {
 
     $options[ 'und' ][ ] = array (
