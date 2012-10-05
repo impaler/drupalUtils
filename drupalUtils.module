@@ -3,6 +3,7 @@
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/path/path.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/utils/file.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/utils/views.inc" );
+require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/generate/string.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/nodeType.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/book.inc" );
 require_once( drupal_get_path ( 'module', 'drupalUtils' ) . "/content/node.inc" );
