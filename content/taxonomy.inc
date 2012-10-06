@@ -85,9 +85,19 @@ function create_taxonomy_term ( array $settings ) {
 }
 
 function createTaxonomyFieldArray ( $fieldName , $tid ) {
-    $options[ 'und' ][ ] = array (
-        'tid' => $tid ,
-    );
+    if ( is_array ( $tid ) ) {
+
+        foreach ( $tid as $term ) {
+            $options[ 'und' ][ ] = array (
+                'tid' => $term ,
+            );
+        }
+
+    } else {
+        $options[ 'und' ][ ] = array (
+            'tid' => $tid ,
+        );
+    }
 
     $field = array (
         'name' => $fieldName ,
