@@ -23,3 +23,15 @@ function randArraySelection ( $array , $min = 1 , $max = 1 ) {
     }
     return $return;
 }
+
+function user_has_role($role, $user = NULL) {
+  if ($user == NULL) {
+    global $user;
+  }
+
+  if (is_array($user->roles) && in_array($role, array_values($user->roles))) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
