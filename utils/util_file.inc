@@ -54,3 +54,37 @@ function drupal_get_absolute_theme_path ( $themeName ) {
 
     return $path;
 }
+
+//returns individual file objects
+//$file = new stdClass();
+//$file->uri = $uri;
+//$file->filename = $filename;
+//$file->name = pathinfo($filename, PATHINFO_FILENAME);
+
+function getImagesFromDir ( $imagepath ) {
+    $mask = '/[a-zA-Z0-9\_\-\.\]\[]+\.(jpe?g|gif|png|JPE?G|GIF|PNG)$/';
+    $ignore = '/(\.\.?|CVS)$/';
+    //drupal_set_message ( $imagepath );
+    $images = file_scan_directory ( $imagepath , $mask , array ( 'nomask' => $ignore ,
+            'callback' => $callback = 0 ,
+            'recurse' => $recurse = TRUE ,
+            'key' => $key = 'filename' ,
+            'min_depth' => $min_depth = 0 )
+    );
+
+    return $images;
+}
+
+function createFakeFile ($filename, $size_wanted = 126345 ) {
+//    $filename    = 'foo.txt'; 
+//    $size_wanted =  126345; // bytes 
+    $junkdata = NULL; 
+    
+    while (strlen($junkdata) < $size_wanted) { 
+      $junkdata .= chr(mt_rand(32, 126)); 
+    } 
+    
+    $fp = fopen($filename, 'w'); 
+    fwrite ($fp, $junkdata); 
+    fclose($fp);
+}
