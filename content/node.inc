@@ -144,8 +144,36 @@ function createNode ( array $settings ) {
         }
     }
 
-    node_save_action($node);
+    node_save_action ( $node );
 
+    //use the correct filefield path if drush uid 0
+    global $user;
+    if ( ! empty ( $settings[ 'fields' ] ) && ( $user->uid == 0 ) && module_exists('filefield_paths') ) {
+        foreach ( $fields as $field ) {
+            if ( isset( $field[ 'type' ] ) ) {
+                if ( $field[ 'type' ] == 'file' ) {
+                    $field_name = $field[ 'name' ];
+                    $entity_type = 'node';
+                    $bundle_name = $node->type;
+                    $info_instance = field_info_instance ( $entity_type , $field_name , $bundle_name );
+                    $target_path = $info_instance[ 'settings' ][ 'filefield_paths' ][ 'file_path' ][ 'value' ];
+                    $token_data = array ( 'node' => node_load ( $node->nid ) );
+                    $target_path = token_replace ( $target_path , $token_data , array ( 'clear' => TRUE ) );
+                    $file_field = $node->$field_name;
+                    $files = $file_field[ 'und' ];
+                    foreach ( $files as $file ) {
+                        $file_object = file_load ( $file[ 'fid' ] );
+                        $original_filename = $file[ 'filename' ];
+                        $target_path = file_default_scheme () . '://' . $target_path . "/";
+                        $target_path_basename = $target_path . $original_filename;
+                        file_prepare_directory ( $target_path , FILE_CREATE_DIRECTORY , 'file_directory_path' );
+                        file_move ( $file_object , $target_path_basename );
+                    }
+                }
+            }
+        }
+    }
+    
     return $node;
 
 }

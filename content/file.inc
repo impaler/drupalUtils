@@ -97,6 +97,7 @@ function createExistingFileFilefieldArray ( $filepath , $fieldName , $uid , $ima
     $field = array (
         'name' => $fieldName ,
         'options' => $options ,
+        'type' => 'file' ,
     );
 
     return $field;
