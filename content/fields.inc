@@ -1,14 +1,16 @@
 <?
 
-function createtextFieldArray ( $fieldName , $sourcecode ) {
+function createtextFieldArray ( $fieldName , $sourcecode, $format = 'plain_text' ) {
 
     $options[ 'und' ][ ] = array (
         'value' => $sourcecode ,
+        'format' => $format,
     );
 
     $field = array (
         'name' => $fieldName ,
         'options' => $options ,
+        
     );
 
     return $field;
