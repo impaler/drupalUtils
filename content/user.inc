@@ -59,3 +59,8 @@ function get_user_comments_count ( $uid ) {
 
     return 0;
 }
+
+function get_user_member_for ( $uid ) {
+    $user = user_load($uid);
+    return format_interval(REQUEST_TIME - $user->created);
+}
