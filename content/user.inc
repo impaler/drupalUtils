@@ -35,8 +35,7 @@ function createUser ( $settings ) {
 
 }
 
-//todo test
-function get_user_posts_count ( $uid , $type = 'your_desired_content_type' ) {
+function get_user_posts_count ( $uid , $type ) {
     $query = db_select ( 'node' , 'n' );
     $query->condition ( 'uid' , $uid , '=' );
     $query->condition ( 'type' , $type , '=' );
@@ -49,7 +48,6 @@ function get_user_posts_count ( $uid , $type = 'your_desired_content_type' ) {
     return 0;
 }
 
-//todo test
 function get_user_comments_count ( $uid ) {
     $query = db_select ( 'comment' , 'c' );
     $query->condition ( 'uid' , $uid , '=' );
