@@ -75,6 +75,23 @@ function get_user_forum_topic_count ( $uid ) {
     return 0;
 }
 
+function get_user_forum_new_count ( ) {
+    //default view provided by advanced forum module
+    $view = views_get_view ( 'advanced_forum_new_topics' );
+    $display_id = 'default';
+    
+      if ( $view ) {
+          $view->preview ( $display_id );
+          if ($view->result) {
+              return ( $view->total_rows ); 
+          } else {
+              return null;
+          }
+    
+      }
+}
+    
+
 function get_user_member_for ( $uid ) {
     $user = user_load($uid);
     return format_interval(REQUEST_TIME - $user->created);
