@@ -60,6 +60,21 @@ function get_user_comments_count ( $uid ) {
     return 0;
 }
 
+function get_user_forum_topic_count ( $uid ) {
+
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'forum')
+        ->propertyCondition('uid', $uid);
+    
+    $result = $query->execute();
+    
+    if (isset($result['node']))
+        return count($result['node']); 
+    
+    return 0;
+}
+
 function get_user_member_for ( $uid ) {
     $user = user_load($uid);
     return format_interval(REQUEST_TIME - $user->created);
